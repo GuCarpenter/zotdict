@@ -1,0 +1,51 @@
+<vbox
+	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<groupbox>
+		<label><html:h2>Zotdict</html:h2></label>
+
+		<hbox align="center">
+			<label value="Base URL" style="min-width: 120px;"/>
+			<html:input type="text" style="flex: 1;" preference="__prefsPrefix__.baseURL"/>
+		</hbox>
+
+		<hbox align="center">
+			<label value="API Key" style="min-width: 120px;"/>
+			<html:input type="password" style="flex: 1;" preference="__prefsPrefix__.apiKey"/>
+		</hbox>
+
+		<hbox align="center">
+			<label value="Model" style="min-width: 120px;"/>
+			<html:input type="text" style="flex: 1;" preference="__prefsPrefix__.model"/>
+		</hbox>
+
+		<hbox align="center">
+			<label value="Answer language" style="min-width: 120px;"/>
+			<html:input type="text" style="flex: 1;" preference="__prefsPrefix__.targetLang"/>
+		</hbox>
+
+		<hbox align="center">
+			<label value="Context characters" style="min-width: 120px;"/>
+			<html:input type="number" min="0" step="50" style="width: 100px;" preference="__prefsPrefix__.contextChars"/>
+		</hbox>
+
+		<separator/>
+
+		<checkbox
+			label="Automatically save the explanation as an annotation comment"
+			native="true"
+			preference="__prefsPrefix__.autoAnnotate"/>
+
+		<hbox align="center">
+			<label value="Annotation color (hex)" style="min-width: 120px;"/>
+			<html:input type="text" style="width: 120px;" preference="__prefsPrefix__.annotationColor"/>
+		</hbox>
+
+		<separator/>
+
+		<vbox>
+			<label value="System prompt"/>
+			<html:textarea rows="6" style="width: 100%;" preference="__prefsPrefix__.systemPrompt"></html:textarea>
+		</vbox>
+	</groupbox>
+</vbox>

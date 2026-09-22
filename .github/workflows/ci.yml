@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Typecheck and build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - run: npm ci
+
+      # Building runs the scaffold pack plus `tsc --noEmit`, so a missing asset,
+      # a broken manifest substitution or a type error all fail here.
+      - name: Build the XPI
+        run: npm run build
+
+      - name: Upload the XPI
+        uses: actions/upload-artifact@v4
+        with:
+          name: zotdict-xpi
+          path: .scaffold/build/zotdict.xpi
+          if-no-files-found: error

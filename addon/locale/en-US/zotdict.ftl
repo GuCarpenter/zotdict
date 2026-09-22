@@ -1,0 +1,1 @@
+zotdict-pref-title = Zotdict

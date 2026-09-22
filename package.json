@@ -1,0 +1,34 @@
+{
+  "name": "zotdict",
+  "type": "module",
+  "version": "0.1.0",
+  "description": "Select a word or phrase in the Zotero reader and query an LLM for its meaning in context.",
+  "config": {
+    "addonName": "Zotdict",
+    "addonID": "zotdict@gucarpenter.github.io",
+    "addonRef": "zotdict",
+    "addonInstance": "Zotdict",
+    "prefsPrefix": "extensions.zotero.zotdict"
+  },
+  "author": "GuCarpenter",
+  "license": "AGPL-3.0-or-later",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GuCarpenter/zotdict.git"
+  },
+  "scripts": {
+    "start": "zotero-plugin serve",
+    "build": "zotero-plugin build && npm run typecheck",
+    "typecheck": "tsc --noEmit",
+    "release": "zotero-plugin release"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.0",
+    "typescript": "^5.9.3",
+    "zotero-plugin-scaffold": "^0.9.1",
+    "zotero-types": "^4.1.3"
+  },
+  "dependencies": {
+    "marked": "^18.0.11"
+  }
+}
