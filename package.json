@@ -1,7 +1,7 @@
 {
   "name": "zotdict",
   "type": "module",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Select a word or phrase in the Zotero reader, look it up in OALD/ODE, and create an Anki AIWord card with the sentence and an AI explanation.",
   "config": {
     "addonName": "Zotdict",
