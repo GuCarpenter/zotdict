@@ -1,5 +1,9 @@
 import { config } from "../package.json";
 import { onRenderTextSelectionPopup } from "./dict";
+import {
+  registerAnnotationSync,
+  unregisterAnnotationSync,
+} from "./annotation-sync";
 
 export async function onStartup(): Promise<void> {
   await Promise.all([
@@ -10,9 +14,12 @@ export async function onStartup(): Promise<void> {
 
   registerReaderListener();
   registerPreferencePane();
+  registerAnnotationSync();
 }
 
 export async function onShutdown(): Promise<void> {
+  unregisterAnnotationSync();
+
   if (addon.data.popupHandler) {
     try {
       (Zotero.Reader as any).unregisterEventListener(

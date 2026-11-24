@@ -2,7 +2,7 @@
   "name": "zotdict",
   "type": "module",
   "version": "0.1.0",
-  "description": "Select a word or phrase in the Zotero reader and query an LLM for its meaning in context.",
+  "description": "Select a word or phrase in the Zotero reader, look it up in OALD/ODE, and create an Anki AIWord card with the sentence and an AI explanation.",
   "config": {
     "addonName": "Zotdict",
     "addonID": "zotdict@gucarpenter.github.io",
@@ -29,6 +29,7 @@
     "zotero-types": "^4.1.3"
   },
   "dependencies": {
+    "fflate": "^0.8.3",
     "marked": "^18.0.11"
   }
 }

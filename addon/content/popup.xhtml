@@ -4,9 +4,9 @@
 	xmlns:html="http://www.w3.org/1999/xhtml"
 	title="Zotdict"
 	windowtype="zotdict:popup"
-	width="480"
-	height="380"
-	style="background:#ffffff;"
+	width="580"
+	height="720"
+	style="background:#f2efe9;"
 	onload="ZotdictPopup.init()">
 	<html:style><![CDATA[
 		#zotdict-root {
@@ -14,57 +14,41 @@
 			flex-direction: column;
 			height: 100%;
 			box-sizing: border-box;
-			padding: 14px 16px;
+			padding: 10px 12px 12px;
 			gap: 8px;
 			overflow: hidden;
-			background: #ffffff;
-			color: #111111;
+			background: #f2efe9;
+			color: #1e2328;
 			font-family: -moz-default, sans-serif;
 		}
-		#zotdict-term {
-			margin: 0;
-			font-size: 15px;
-			font-weight: 600;
-		}
-		#zotdict-body {
-			flex: 1;
-			overflow: auto;
-			font-size: 13px;
-			line-height: 1.55;
+		#zotdict-status {
+			flex: none;
+			font-size: 11px;
+			line-height: 1.4;
+			letter-spacing: 0.02em;
+			color: #5b6470;
+			padding: 0 4px;
 			-moz-user-select: text;
 			user-select: text;
 		}
-		#zotdict-body h1, #zotdict-body h2, #zotdict-body h3 {
-			font-size: 14px;
-			margin: 10px 0 4px;
-		}
-		#zotdict-body p { margin: 6px 0; }
-		#zotdict-body ul, #zotdict-body ol { margin: 6px 0; padding-left: 20px; }
-		#zotdict-body li { margin: 2px 0; }
-		#zotdict-body code {
-			background: #f0f0f0;
-			border-radius: 3px;
-			padding: 1px 4px;
-			font-family: monospace;
-			font-size: 12px;
-		}
-		#zotdict-body pre {
-			background: #f0f0f0;
-			border-radius: 4px;
-			padding: 8px;
+		#zotdict-status.error { color: #b3261e; }
+		#zotdict-status.warn { color: #8a6100; }
+		#zotdict-scroll {
+			flex: 1;
 			overflow: auto;
+			border-radius: 12px;
 		}
-		#zotdict-body pre code { background: none; padding: 0; }
-		#zotdict-body blockquote {
-			margin: 6px 0;
-			padding-left: 10px;
-			border-left: 3px solid #d0d0d0;
-			color: #555;
+		#zotdict-card {
+			min-height: 100%;
+			box-sizing: border-box;
 		}
 	]]></html:style>
+	<html:style id="zotdict-card-style"></html:style>
 	<html:div id="zotdict-root">
-		<html:h2 id="zotdict-term"></html:h2>
-		<html:div id="zotdict-body"></html:div>
+		<html:div id="zotdict-status"></html:div>
+		<html:div id="zotdict-scroll">
+			<html:div id="zotdict-card" class="card"></html:div>
+		</html:div>
 	</html:div>
 	<script><![CDATA[
 		var ZotdictPopup = {
@@ -74,15 +58,23 @@
 					return;
 				}
 				let term = args.term || "Zotdict";
-				document.getElementById("zotdict-term").textContent = term;
 				document.title = "Zotdict: " + term;
 
-				let body = document.getElementById("zotdict-body");
+				let status = document.getElementById("zotdict-status");
+				status.textContent = args.status || "";
+				if (args.statusKind === "error") status.classList.add("error");
+				else if (args.statusKind === "warn") status.classList.add("warn");
+
+				let style = document.getElementById("zotdict-card-style");
+				if (args.css) style.textContent = String(args.css);
+
+				let card = document.getElementById("zotdict-card");
 				if (args.html) {
-					this.renderHTML(body, args.html);
+					this.renderHTML(card, args.html);
 				}
 				else {
-					body.textContent = args.text || "";
+					card.classList.add("empty");
+					card.textContent = args.status || "No content";
 				}
 			},
 

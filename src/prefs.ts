@@ -1,0 +1,9 @@
+import { config } from "../package.json";
+
+export function getPref(key: string): any {
+  return Zotero.Prefs.get(`${config.prefsPrefix}.${key}`, true);
+}
+
+export function log(message: string): void {
+  Zotero.debug(`${config.addonName}: ${message}`);
+}
